@@ -21,6 +21,9 @@ public enum ArithmeticOperator {
     }, DIVISION("/"){
         @Override
         public int arithmeticCalculate(int operand1, int operand2) {
+            if(operand2==0){
+                throw new IllegalArgumentException("0 is not acceptable.");
+            }
             return operand1/operand2;
         }
     };
@@ -33,7 +36,7 @@ public enum ArithmeticOperator {
 
     public static int calculate(int operand1, String operator, int operand2) {
         ArithmeticOperator arithmeticOperator = Arrays.stream(values())
-                .filter(v -> v.operator.equals(operator))
+                .filter(v-> v.operator.equals(operator))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("not correct."));
 
